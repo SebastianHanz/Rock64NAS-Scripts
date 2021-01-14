@@ -1,0 +1,65 @@
++###################################################################+
++ HIER WERDEN DIE INDIVIDUELLEN SERVERPARAMETER ZENTRAL HINTERLEGT  +
++###################################################################+
+
++###################################################################+
++#### SERVER SETTINGS ##############################################+
++ Diese Settings dienen dem Erstellen von Docker Container          +
+																	
+SERVER_IP=10.10.10.100
+HOSTNAME=rock64
+TZ=Europe/Berlin
+MYSQLPASSWORD=rock64mysql
+PIHOLEPASSWORD=mypiholepassword
+
++#### ENDE SERVER SETTINGS #########################################+
++###################################################################+
+
+
++###################################################################+
++#### GLOBALE PFADE ################################################+
++ HINWEIS! Alle Pfade OHNE "/" am Anfang oder Ende!					+
++ Globale Pfade bekommen den Praefix DIR_ 							+
++ Ziel-Pfade bekommen den Praefix DEST_								+
+																	
+DIR_BACKUPSCRIPTS=home/scripts/Backup
+DIR_DATA=srv/dev-disk-by-label-WDRed_4TB_RAID/Data
+DIR_NEXTCLOUD=srv/dev-disk-by-label-WDRed_4TB_RAID/AppData/Nextcloud
+DIR_NEXTCLOUDDATA=srv/dev-disk-by-label-WDRed_4TB_RAID/Data/Nextcloud
+DIR_PIHOLE=opt/PiHole
+DIR_TEMP=tmp
+DIR_UPDATESCRIPTS=home/scripts/Update
+																	
++#### ENDE GLOBALE PFADE ###########################################+
++###################################################################+
+
+
+
++###################################################################+
++#### BACKUP Quellen ###############################################+
++ Backup-Quellen werden mit dem Praefix SRC_ angegeben 				+
+
+SRC_APPDATA=srv/dev-disk-by-label-WDRed_4TB_RAID/AppData
+SRC_IOBROKER=opt/iobroker
+SRC_OMVBACKUP=srv/dev-disk-by-label-Intern-Backup/Server-Backup/omvbackup
+SRC_SCRIPTS=home/scripts
+																	
++#### ENDE BACKUP QUELLEN ##########################################+
++###################################################################+
+
+
+
++###################################################################+
++#### BACKUP Ziele #################################################+
++ Backup-Ziele werden mit dem Praefix DEST_ angegeben 				+
++ Falls diese Pfade noch nicht existieren werden diese angelegt		+
+
+DEST_BACKUP=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server
+DEST_APPDATA=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/AppData
+DEST_ARCHIVES=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/Archives
+DEST_IOBROKER=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/iobroker
+DEST_OMVBACKUP=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/omvbackup
+DEST_SCRIPTS=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/scripts
+ 
++#### ENDE BACKUP Ziele   ##########################################+
++###################################################################+
