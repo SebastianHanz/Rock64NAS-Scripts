@@ -21,7 +21,7 @@ DIR_PIHOLE=${DIR_PIHOLE##*=}
 PIHOLEPASSWORD=PIHOLEPASSWORD=$(egrep -w "PIHOLEPASSWORD" $SRC_SETTINGS)
 PIHOLEPASSWORD=${PIHOLEPASSWORD##*=}
 
-cd ~
+#Create new docker container with custom settings
 docker run -d \
     --name pihole \
     -p 53:53/tcp -p 53:53/udp \

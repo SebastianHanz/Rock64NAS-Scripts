@@ -16,10 +16,7 @@ SRC_APPDATA=${SRC_APPDATA##*=}
 DIR_DATA=$(egrep -w "DIR_DATA" $SRC_SETTINGS)
 DIR_DATA=${DIR_DATA##*=}
 
-
-
-
-
+#Create new docker container with custom settings
 docker run -d \
   --name=Nextcloud \
   --hostname $HOSTNAME \

@@ -1,30 +1,21 @@
 #!/bin/bash
-echo
-echo Halte ioBroker an
-echo
+#This script will automatically update your whole ioBroker-System including adapters
+
+echo -e "Stopping ioBroker...\n"
 iobroker stop
-echo
 
-echo Aktualisiere Paketdatenbank
-echo
+echo -e"\nUpdating database...\n"
 iobroker update
-echo
 
-echo Update ioBroker selbst
-echo
+echo -e "\nUpdate ioBroker. This may take a while..\n"
 iobroker upgrade self
-echo
 
-echo Update Adapter
-echo
+echo -e "\nUpgrade all updatable adapters\n"
 iobroker upgrade
-echo
 
-echo Starte ioBroker wieder
-echo
+echo -e "\nRestarting ioBroker\n"
 iobroker start
-echo
 
-echo Aktualisierung abgeschlossen!
+echo -e "\nAll done!\n"
 echo Finish!
 exit

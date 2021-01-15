@@ -12,11 +12,11 @@ TZ=${TZ##*=}
 MYSQLPASSWORD=MYSQLPASSWORD=$(egrep -w "MYSQLPASSWORD" $SRC_SETTINGS)
 MYSQLPASSWORD=${MYSQLPASSWORD##*=}
 
-
 #AppData
 SRC_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
 SRC_APPDATA=${SRC_APPDATA##*=}
 
+#Create new docker container with custom settings
 docker run -d \
   --name=NextcloudDB \
   --hostname $HOSTNAME \
@@ -26,7 +26,7 @@ docker run -d \
   -e MYSQL_ROOT_PASSWORD=$MYSQLPASSWORD \
   -p 3306:3306/tcp \
   -v "/$SRC_APPDATA/NextcloudDB:/config:rw" \
-   --restart always \
+  --restart always \
   linuxserver/mariadb:latest
   
   printf 'Starting up NextcloudDB container '
