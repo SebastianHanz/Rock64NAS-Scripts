@@ -1,0 +1,12 @@
+[Unit]
+Description=Sende eingeleiteten SHUTDOWN an USV
+DefaultDependencies=no
+Before=shutdown.target halt.target 
+#Default-Start: 2 3 4 5
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+ExecStop=/home/scripts/SHUTDOWN_AN_USV.sh
+
+[Install]
+WantedBy=halt.target  shutdown.target 

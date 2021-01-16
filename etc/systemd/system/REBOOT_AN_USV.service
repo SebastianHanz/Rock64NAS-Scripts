@@ -1,0 +1,12 @@
+[Unit]
+Description=Sende REBOOT an USV
+DefaultDependencies=no
+Before=reboot.target 
+# Default-Start: 6
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+ExecStop=/home/scripts/REBOOT_AN_USV.sh 
+
+[Install]
+WantedBy=reboot.target
