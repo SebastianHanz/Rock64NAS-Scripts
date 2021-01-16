@@ -12,10 +12,7 @@ TZ=${TZ##*=}
 SRC_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
 SRC_APPDATA=${SRC_APPDATA##*=}
 
-
-
-
- docker run -d \
+docker run -d \
   -p 8000:8000 \
   -p 9009:9000 \
   --name=portainer \
@@ -23,7 +20,5 @@ SRC_APPDATA=${SRC_APPDATA##*=}
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v "/$SRC_APPDATA/Portainer:/data:rw" \
   portainer/portainer-ce
-  
-    printf 'Starting up Portainer container '
 
-
+printf 'Starting up Portainer container '

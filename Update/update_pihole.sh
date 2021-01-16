@@ -2,7 +2,6 @@
 #SRC_SETTINGS müuss immer zuerst angegeben werden!
 SRC_SETTINGS="/home/scripts/Settings.txt"
 
-
 #AppData
 DIR_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
 DIR_APPDATA=${SRC_APPDATA##*=}
@@ -10,7 +9,6 @@ DIR_APPDATA=${SRC_APPDATA##*=}
 #Pihole
 DIR_PIHOLE=$(egrep -w "DIR_PIHOLE" $SRC_SETTINGS)
 DIR_PIHOLE=${DIR_PIHOLE##*=}
-
 
 #Backup-Scripts
 DIR_BACKUPSCRIPTS=$(egrep -w "DIR_BACKUPSCRIPTS" $SRC_SETTINGS)
@@ -20,42 +18,37 @@ DIR_BACKUPSCRIPTS=${DIR_BACKUPSCRIPTS##*=}
 DIR_UPDATESCRIPTS=$(egrep -w "DIR_UPDATESCRIPTS" $SRC_SETTINGS)
 DIR_UPDATESCRIPTS=${DIR_UPDATESCRIPTS##*=}
 
-
-pullNewestPiHole(){
-echo -e "\nDownloade nun das aktuelle PiHole Image!\n"
-docker pull pihole/pihole:dev-armhf
-return $?
+pullNewestPiHole() {
+	echo -e "\nDownloade nun das aktuelle PiHole Image!\n"
+	docker pull pihole/pihole:dev-armhf
+	return $?
 }
 
-createPiHole(){
-sleep 2
-echo -e Halte PiHole an
-docker stop pihole
+createPiHole() {
+	sleep 2
+	echo -e Halte PiHole an
+	docker stop pihole
 
-sleep 2
-echo -e Lösche alten PiHole-Docker-Container
-docker rm pihole
+	sleep 2
+	echo -e Lösche alten PiHole-Docker-Container
+	docker rm pihole
 
-sleep 2
-echo -e "Erstelle neuen Pihole-Container mit Settings aus der Settings.txt\n"
-cd /
-cd /$DIR_UPDATESCRIPTS/
-./createPiHoleContainer.sh
+	sleep 2
+	echo -e "Erstelle neuen Pihole-Container mit Settings aus der Settings.txt\n"
+	cd /
+	cd /$DIR_UPDATESCRIPTS/
+	./createPiHoleContainer.sh
 }
-
-
-
 
 #Falls keine URL angegeben, welcher Parameter denn dann?
 if [ "$1" = "" ]; then
 	echo -e "\n Keine Parameter angegeben! \n"
 	echo -e "Finish!"
 	exit
-elif [ "$1" = "-c" ];then #Nur Container updaten
+elif [ "$1" = "-c" ]; then #Nur Container updaten
 	#Abfrage ob Backup gemacht werden soll
 	echo -e Die Dateien liegen nun bereit zum Update. Soll ein Backup des AppData-Ordners gemacht werden?
 	read -p "Gebe JA, NEIN, oder QUIT ein:" ANSWER
-
 
 	if [ "$ANSWER" = "JA" ]; then
 		cd /$DIR_BACKUPSCRIPTS/
@@ -64,8 +57,8 @@ elif [ "$1" = "-c" ];then #Nur Container updaten
 	elif [ "$ANSWER" = "NEIN" ]; then
 		echo -e " Fahre ohne Backup fort!\n"
 	else
-	echo -e "Finish!"
-	exit
+		echo -e "Finish!"
+		exit
 	fi
 
 	echo -e "\nEs wird versucht das PiHole-Image zu updaten\n"
@@ -95,35 +88,7 @@ fi
 cd /
 echo -e "\n Räume alte Docker Images auf...\n"
 docker image prune -f
+sleep 5
 echo -e "Finish!"
 exit
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#unzip ./nextcloud-18.0.4.zip -d ./test

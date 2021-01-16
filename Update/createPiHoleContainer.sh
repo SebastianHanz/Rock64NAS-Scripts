@@ -31,8 +31,8 @@ docker run -d \
     -e WEBPASSWORD="$PIHOLEPASSWORD" \
     -v "/$DIR_PIHOLE/:/etc/pihole/:rw" \
     -v "/$DIR_PIHOLE/DNSmasq/:/etc/dnsmasq.d/:rw" \
-	-e DNS1="127.0.0.1" \
-	-e DNS2="1.1.1.1" \
+    -e DNS1="127.0.0.1" \
+    -e DNS2="1.1.1.1" \
     --dns=127.0.0.1 --dns=1.1.1.1 \
     --restart=always \
     --hostname "$HOSTNAME" \
@@ -40,5 +40,5 @@ docker run -d \
     -e PROXY_LOCATION="pi.net" \
     -e ServerIP="$SERVER_IP" \
     pihole/pihole:dev-armhf
-  
-  echo -e "\nStarting up PiHole container\n"
+
+echo -e "\nStarting up PiHole container\n"

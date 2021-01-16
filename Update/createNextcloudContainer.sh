@@ -29,5 +29,5 @@ docker run -d \
   -v "/$DIR_DATA/Nextcloud:/data:rw" \
   --restart always \
   linuxserver/nextcloud:latest
-  
-  printf 'Starting up Nextcloud container '
+
+printf 'Starting up Nextcloud container '

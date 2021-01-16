@@ -28,5 +28,5 @@ docker run -d \
   -v "/$SRC_APPDATA/NextcloudDB:/config:rw" \
   --restart always \
   linuxserver/mariadb:latest
-  
-  printf 'Starting up NextcloudDB container '
+
+printf 'Starting up NextcloudDB container '

@@ -12,6 +12,7 @@ sudo apt-get install -y nodejs
 
 echo -e "\n Starte ioBroker wieder\n"
 iobroker start
+
 echo -e "\nAktualisierung abgeschlossen!\n"
 echo Finish!
 exit
