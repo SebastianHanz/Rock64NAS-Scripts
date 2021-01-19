@@ -124,18 +124,18 @@ fi
 copyAppData() {
 	echo -e "\n################################### AppData #############################################"
 	infoTEXT $DEST_APPDATA -appdata
-	
+
 	echo -e "Halte MariaDB  und Nextcloud an\n"
 	docker stop Nextcloud
 	docker stop NextcloudDB
 
 	echo -e "Beginne mit dem Kopiervorgang...Bitte warten\n"
-	cp -r /$SRC_APPDATA /$DEST_APPDATA/backup-appdata-$DATE
+	rsync -ah -P /$SRC_APPDATA /$DEST_APPDATA/backup-appdata-$DATE
 	echo "$VERSIONSINFORMATION" >/$DEST_APPDATA/backup-appdata-$DATE/VERSIONSINFO.txt
 	echo -e "\nAppData-Backup erfolgreich beendet!\n"
 
 	echo -e "Starte MariaDB und Nextcoud wieder\n"
-	docker start NextcloudDB./Ueberpruefe
+	docker start NextcloudDB
 	sleep 5
 	docker start Nextcloud
 	sleep 10
@@ -148,7 +148,7 @@ copyIOBroker() {
 	iobroker stop
 
 	echo -e "Beginne mit dem Kopiervorgang...Bitte warten\n"
-	cp -r /$SRC_IOBROKER /$DEST_IOBROKER/backup-iobroker-$DATE
+	rsync -ah -P /$SRC_IOBROKER /$DEST_IOBROKER/backup-iobroker-$DATE
 	echo "$VERSIONSINFORMATION" >/$DEST_IOBROKER/backup-iobroker-$DATE/VERSIONSINFO.txt
 	echo -e "IoBroker-Backup erfolgreich beendet!\n"
 
@@ -163,7 +163,7 @@ copyOMVBACKUP() {
 
 	echo -e "Beginne mit dem Kopiervorgang...Bitte warten\n"
 	cd /$DEST_OMVBACKUP/ && mkdir "./backup-omvbackup-$DATE"
-	cp /$SRC_OMVBACKUP/$newestOMVBackup.* /$DEST_OMVBACKUP/backup-omvbackup-$DATE/
+	rsync -ah -P /$SRC_OMVBACKUP/$newestOMVBackup.* /$DEST_OMVBACKUP/backup-omvbackup-$DATE/
 	echo "$VERSIONSINFORMATION" >/$DEST_OMVBACKUP/backup-omvbackup-$DATE/VERSIONSINFO.txt
 	echo -e "OMVBACKUP-Backup erfolgreich beendet!\n"
 }
@@ -173,7 +173,7 @@ copyScripts() {
 	infoTEXT $DEST_SCRIPTS -scripts
 
 	echo -e "Beginne mit dem Kopiervorgang...Bitte warten\n"
-	cp -r /$SRC_SCRIPTS /$DEST_SCRIPTS/backup-scripts-$DATE
+	rsync -ah -P /$SRC_SCRIPTS /$DEST_SCRIPTS/backup-scripts-$DATE
 	echo "$VERSIONSINFORMATION" >/$DEST_SCRIPTS/backup-scripts-$DATE/VERSIONSINFO.txt
 	echo -e "Scripts-Backup erfolgreich beendet!\n"
 }
@@ -187,6 +187,7 @@ infoARCHIVES() {
 	echo ' Bitte lass das Konsolenfenster offen bis das Backup abgeschlossen ist!'
 	echo ' Das Archiv wird backup'$FILENAME-$DATE.tar.bz 'heißen.'
 	echo '#########################################################################################'
+	sleep 5
 	echo
 	echo 'Starte Archivierung...'
 	echo
@@ -201,6 +202,7 @@ infoTEXT() {
 	echo ' Bitte lass das Konsolenfenster offen bis das Backup abgeschlossen ist!'
 	echo ' Die Dateien werden im Ordner 'backup$2-$DATE 'liegen.'
 	echo '#########################################################################################'
+	sleep 5
 	echo
 	echo 'Starte Backup...'
 	echo
