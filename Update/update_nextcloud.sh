@@ -47,11 +47,11 @@ checkCHECKSUM()
   fi
   
   echo -e Vergleiche nun die Checksummen!
-  FILE_SHA=$(cat $DIR_TEMP/$ZIPNAME.sha256)
+  FILE_SHA=$(cat /$DIR_TEMP/$ZIPNAME.sha256)
   FILE_SHA=${FILE_SHA%% *}
   echo -e "SOLL: $FILE_SHA"
   
-  ZIP_SHA=$(sha256sum $DIR_TEMP/$ZIPNAME)
+  ZIP_SHA=$(sha256sum /$DIR_TEMP/$ZIPNAME)
   ZIP_SHA=${ZIP_SHA%% *}
   echo -e "IST:  $ZIP_SHA"
   
