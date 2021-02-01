@@ -68,7 +68,7 @@ checkCHECKSUM()
 
 pullNewestNextcloud(){
 echo -e "\nDownloade nun das aktuelle Nextcloud Image!\n"
-docker pull linuxserver/nextcloud:latest
+docker pull linuxserver/nextcloud:arm32v7-version-20.0.3
 return $?
 }
 

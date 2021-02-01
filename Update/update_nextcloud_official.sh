@@ -22,7 +22,7 @@ DIR_UPDATESCRIPTS=${DIR_UPDATESCRIPTS##*=}
 #SubRoutinen
 pullNewestNextcloud() {
 	echo -e "\nDownloade nun das aktuellste Nextcloud Image\n"
-	docker pull linuxserver/nextcloud:latest
+	docker pull linuxserver/nextcloud:arm32v7-version-20.0.3
 	return $?
 }
 
@@ -120,5 +120,3 @@ sleep 10
 
 echo Finish!
 exit
-
-#unzip ./nextcloud-18.0.4.zip -d ./test
