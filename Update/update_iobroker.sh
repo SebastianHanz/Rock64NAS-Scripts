@@ -4,7 +4,7 @@
 echo -e "Stopping ioBroker...\n"
 iobroker stop
 
-echo -e"\nUpdating database...\n"
+echo -e "\nUpdating database...\n"
 iobroker update
 
 echo -e "\nUpdate ioBroker. This may take a while..\n"
