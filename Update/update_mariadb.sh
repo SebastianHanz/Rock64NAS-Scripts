@@ -6,7 +6,6 @@ SRC_SETTINGS="/home/scripts/Settings.txt"
 SRC_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
 SRC_APPDATA=${SRC_APPDATA##*=}
 
-
 #Backup-Scripts
 DIR_BACKUPSCRIPTS=$(egrep -w "DIR_BACKUPSCRIPTS" $SRC_SETTINGS)
 DIR_BACKUPSCRIPTS=${DIR_BACKUPSCRIPTS##*=}
@@ -15,52 +14,45 @@ DIR_BACKUPSCRIPTS=${DIR_BACKUPSCRIPTS##*=}
 DIR_UPDATESCRIPTS=$(egrep -w "DIR_UPDATESCRIPTS" $SRC_SETTINGS)
 DIR_UPDATESCRIPTS=${DIR_UPDATESCRIPTS##*=}
 
-
-
-pullNewestNextcloudDB(){
-echo -e "\nDownloade nun das aktuelle Nextcloud Image!\n"
-docker pull linuxserver/mariadb:latest
-return $?
+pullNewestNextcloudDB() {
+	echo -e "\nDownloade nun das aktuelle Nextcloud Image!\n"
+	docker pull linuxserver/mariadb:latest
+	return $?
 }
 
-createNextcloudDB(){
-sleep 2
-echo -e Halte NextcloudDB an
-docker stop Nextcloud
-iobroker stop
-docker stop NextcloudDB
+createNextcloudDB() {
+	sleep 2
+	echo -e Halte Nextcloud, ioBroker und NextcloudDB an
+	docker stop Nextcloud
+	iobroker stop
+	docker stop NextcloudDB
 
-sleep 2
-echo -e Lösche alten NextcloudDB-Docker-Container
-docker rm NextcloudDB
+	sleep 2
+	echo -e Lösche alten NextcloudDB-Docker-Container
+	docker rm NextcloudDB
 
-sleep 2
-echo -e "Erstelle neuen NextcloudDB-Container mit Settings aus der Settings.txt\n"
-cd /
-cd /$DIR_UPDATESCRIPTS/
-./createNextcloudDBContainer.sh
-docker start Nextcloud
-iobroker start
+	sleep 2
+	echo -e "Erstelle neuen NextcloudDB-Container mit Settings aus der Settings.txt\n"
+	cd /
+	cd /$DIR_UPDATESCRIPTS/
+	./createNextcloudDBContainer.sh
+	docker start Nextcloud
+	iobroker start
 }
 
-
-
-
-
-#Falls keine URL angegeben, welcher Parameter denn dann?
+#Parameterauswertung
 if [ "$1" = "" ]; then
-	echo -e "\n Keine Parameter angegeben! Bitte gebe als Parameter den offiziellen Downloadlink von Nextcloud zur ZIP-Datei ein.\n"
+	echo -e "\n Keine Parameter angegeben! Bitte gebe -c als Parameter an um nur den Container zu aktualisieren\n"
 	echo Finish!
 	exit
-elif [ "$1" = "-c" ];then #Nur Container updaten
+elif [ "$1" = "-c" ]; then #Nur Container updaten
 	echo -e "\nEs wird versucht das NextcloudDB-Image zu updaten\n"
 	pullNewestNextcloudDB
 	retval=$?
-	
+
 	#Abfrage ob Backup gemacht werden soll
 	echo -e "\n Soll ein Backup des AppData-Ordners vor dem Update gemacht werden?\n "
 	read -p "Gebe JA, NEIN, oder QUIT ein:" ANSWER
-
 
 	if [ "$ANSWER" = "JA" ]; then
 		cd /$DIR_BACKUPSCRIPTS
@@ -69,10 +61,10 @@ elif [ "$1" = "-c" ];then #Nur Container updaten
 	elif [ "$ANSWER" = "NEIN" ]; then
 		echo -e " Fahre ohne Backup fort!\n"
 	else
-	echo Finish!
-	exit
+		echo Finish!
+		exit
 	fi
-	
+
 	if [ "$retval" = "2" ]; then
 		echo -e "Der Container wurde erfolgreich heruntergeladen!\n Der Container wird nun neu erstellt!"
 		createNextcloudDB
@@ -92,49 +84,16 @@ elif [ "$1" = "-c" ];then #Nur Container updaten
 	fi
 	echo Finish!
 	exit
-fi
-	echo -e "\n Die eingegebene URL passt nicht zu einem  offiziellen Nextcloud-Downloadserver!\n EXIT!\n"
+else
+	echo -e "\n Ich kenne diesen Parameter nicht... versuche es mal mit -c \n"
 	echo Finish!
 	exit
 fi
 
-
-
-
 cd /
 echo -e "\n Raeume alte Dockerimages auf...\n"
-sleep 5
+sleep 2
 docker image prune -f
 sleep 2
 echo Finish!
 exit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#unzip ./nextcloud-18.0.4.zip -d ./test
