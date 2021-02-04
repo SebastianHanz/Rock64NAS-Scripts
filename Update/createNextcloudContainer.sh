@@ -28,6 +28,6 @@ docker run -d \
   -v "/$SRC_APPDATA/Nextcloud:/config:rw" \
   -v "/$DIR_DATA/Nextcloud:/data:rw" \
   --restart always \
-  linuxserver/nextcloud:arm32v7-version-20.0.3
+  linuxserver/nextcloud:arm32v7-latest
 
 printf 'Starting up Nextcloud container '

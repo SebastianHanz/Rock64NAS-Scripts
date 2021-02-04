@@ -22,7 +22,7 @@ DIR_UPDATESCRIPTS=${DIR_UPDATESCRIPTS##*=}
 #SubRoutinen
 pullNewestNextcloud() {
 	echo -e "\nDownloade nun das aktuellste Nextcloud Image\n"
-	docker pull linuxserver/nextcloud:arm32v7-version-20.0.3
+	docker pull linuxserver/nextcloud:arm32v7-latest
 	return $?
 }
 
