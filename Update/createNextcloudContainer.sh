@@ -18,16 +18,16 @@ DIR_DATA=${DIR_DATA##*=}
 
 #Create new docker container with custom settings
 docker run -d \
-  --name=Nextcloud \
-  --hostname $HOSTNAME \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=$TZ \
-  -p 81:80/tcp \
-  -p 444:443/tcp \
-  -v "/$SRC_APPDATA/Nextcloud:/config:rw" \
-  -v "/$DIR_DATA/Nextcloud:/data:rw" \
-  --restart always \
-  linuxserver/nextcloud:arm32v7-version-20.0.3
+--name=Nextcloud \
+--hostname $HOSTNAME \
+-e PUID=1000 \
+-e PGID=1000 \
+-e TZ=$TZ \
+-p 81:80/tcp \
+-p 444:443/tcp \
+-v "/$SRC_APPDATA/Nextcloud:/config:rw" \
+-v "/$DIR_DATA/Nextcloud:/data:rw" \
+--restart always \
+linuxserver/nextcloud:arm32v7-latest
 
 printf 'Starting up Nextcloud container '
