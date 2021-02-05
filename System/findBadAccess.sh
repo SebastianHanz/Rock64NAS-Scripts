@@ -1,40 +1,44 @@
 #!/bin/bash
 dir=/var/log
+saveDir=$(pwd)
 
 echo -e "\n Durchsuche Log-Dateien nach fehlerhaften Loginversuchen!\n"
-egrep -w "Failed password" $dir/auth.log >> /home/Failed-SSH-Logins.txt
-egrep -w "Accepted password" $dir/auth.log >> /home/Accepted-SSH-Logins.txt
-egrep -w "Unauthorized login" $dir/auth.log >> /home/Failed-WEB-GUI-Logins.txt
-egrep -w "Authorized login" $dir/auth.log >> /home/Accepted-WEB-GUI-Logins.txt
+egrep -w "Failed password" $dir/auth.log >>$saveDir/Failed-SSH-Logins.log
+egrep -w "Accepted password" $dir/auth.log >>$saveDir/Accepted-SSH-Logins.log
+egrep -w "Unauthorized login" $dir/auth.log >>$saveDir/Failed-WEB-GUI-Logins.log
+egrep -w "Authorized login" $dir/auth.log >>$saveDir/Accepted-WEB-GUI-Logins.log
 
 cd $dir
 FileCount=0
-FileCount=$(ls -l | grep auth. | wc -l )
+FileCount=$(ls -l | grep auth. | wc -l)
 echo -e "\n Es wurden $FileCount Log-Dateien gefunden.\n"
 echo -e "\n Entpacke gefundene Archive.\n Das dauert einen Moment. \n"
 
-cp $dir/auth.log /home/auth.log
-cp $dir/auth.log.1 /home/auth1.log
+cp $dir/auth.log $saveDir/auth.log >/dev/null 2>&1
+cp $dir/auth.log.1 $saveDir/auth1.log >/dev/null 2>&1
 
-for ((i=2; i < $FileCount; i++)) ; do
-  gunzip $dir/auth.log.$i.gz > /dev/null 2>&1
-  cp $dir/auth.log.$i /home/auth$i.log  
+for ((i = 2; i < $FileCount; i++)); do
+  gunzip $dir/auth.log.$i.gz >/dev/null 2>&1
+  cp $dir/auth.log.$i $saveDir/auth$i.log
 done
 
-for ((i=1; i < $FileCount; i++)) ; do
-echo -e "\n Durchsuche jetzt auth$i.log!\n"
-egrep -w "Failed password" /home/auth$i.log >> /home/Failed-SSH-Logins.txt
-egrep -w "Accepted password" /home/auth$i.log  >> /home/Accepted-SSH-Logins.txt
-egrep -w "Unauthorized login" /home/auth$i.log  >> /home/Failed-WEB-GUI-Logins.txt
-egrep -w "Authorized login" /home/auth$i.log  >> /home/Accepted-WEB-GUI-Logins.txt
+for ((i = 1; i < $FileCount; i++)); do
+  echo -e "\n Durchsuche jetzt auth$i.log!\n"
+  egrep -w "Failed password" $saveDir/auth$i.log >>$saveDir/Failed-SSH-Logins.log
+  egrep -w "Accepted password" $saveDir/auth$i.log >>$saveDir/Accepted-SSH-Logins.log
+  egrep -w "Unauthorized login" $saveDir/auth$i.log >>$saveDir/Failed-WEB-GUI-Logins.log
+  egrep -w "Authorized login" $saveDir/auth$i.log >>$saveDir/Accepted-WEB-GUI-Logins.log
 done
+
+cd $saveDir
+rm ./auth.* >/dev/null 2>&1
 
 echo -e "\n Das wars! \n"
-FailedSSHLogins=$(wc -l /home/Failed-SSH-Logins.txt )
+FailedSSHLogins=$(wc -l $saveDir/Failed-SSH-Logins.log)
 FailedSSHLogins=${FailedSSHLogins%%/*}
-FailedWEBLogins=$(wc -l /home/Failed-WEB-GUI-Logins.txt )
+FailedWEBLogins=$(wc -l $saveDir/Failed-WEB-GUI-Logins.log)
 FailedWEBLogins=${FailedWEBLogins%%/*}
 echo -e "\n Es wurden $FailedSSHLogins fehlgeschlagene SSH-Logins und $FailedWEBLogins fehlgeschlagene OMV-Web-GUI-Logins festgestellt!\n"
 cd /
+echo Finish!
 exit
-
