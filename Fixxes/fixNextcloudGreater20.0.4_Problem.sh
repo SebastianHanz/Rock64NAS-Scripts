@@ -13,5 +13,8 @@ wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1
 echo -e $YELLOW"Installiere libsecomp2 v.2.5.1-1_armhf..."$ENDCOLOR
 sudo dpkg -i libseccomp2_2.5.1-1_armhf.deb
 
+echo -e $YELLOW"Entferne Installer..."$ENDCOLOR
+rm libseccomp2_2.5.1-1_armhf.deb
+
 echo -e $YELLOW"Finish!"$ENDCOLOR
 exit
