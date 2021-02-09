@@ -2,6 +2,13 @@
 #SRC_SETTINGS muss immer zuerst angegeben werden!
 SRC_SETTINGS="/home/scripts/Settings.txt"
 
+if [ ! -f "$SRC_SETTINGS" ]; then
+	echo Konnte $SRC_SETTINGS nicht finden!
+	echo Programm wird geschlossen
+	echo Finish!
+	exit
+fi
+
 #AppData
 SRC_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
 SRC_APPDATA=${SRC_APPDATA##*=}

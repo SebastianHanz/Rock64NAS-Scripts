@@ -1,6 +1,14 @@
 #!/bin/bash
 #Variablen und Pfade
 SRC_SETTINGS="/home/scripts/Settings.txt"
+
+if [ ! -f "$SRC_SETTINGS" ]; then
+    echo Konnte $SRC_SETTINGS nicht finden!
+    echo Programm wird geschlossen
+    echo Finish!
+    exit
+fi
+
 HOSTNAME=HOSTNAME=$(egrep -w "HOSTNAME" $SRC_SETTINGS)
 HOSTNAME=${HOSTNAME##*=}
 
