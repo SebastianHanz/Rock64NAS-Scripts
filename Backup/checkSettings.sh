@@ -3,6 +3,13 @@ DATE=$(date +%d-%m-%Y-%H%M%S)
 SRC_SETTINGS="/home/scripts/Settings.txt"
 #echo $(pwd)
 
+if [ ! -f "$SRC_SETTINGS" ]; then
+    echo Konnte $SRC_SETTINGS nicht finden!
+    echo Programm wird geschlossen
+    echo Finish!
+    exit
+fi
+
 echo ""
 echo "      _______. _______ .___________..___________. __  .__   __.   _______      _______.  "
 echo "     /       ||   ____||           ||           ||  | |  \ |  |  /  _____|    /       |  "
@@ -11,7 +18,6 @@ echo "     \   \    |   __|      |  |         |  |     |  | |  .    | |  | |_ | 
 echo " .----)   |   |  |____     |  |         |  |     |  | |  |\   | |  |__| | .----)   |   "
 echo " |_______/    |_______|    |__|         |__|     |__| |__| \__|  \______| |_______/    "
 echo "                                                                                     "
-
 
 echo Server Settings:
 #Server Settings
@@ -76,6 +82,10 @@ DIR_UPDATESCRIPTS=$(egrep -w "DIR_UPDATESCRIPTS" $SRC_SETTINGS)
 DIR_UPDATESCRIPTS=${DIR_UPDATESCRIPTS##*=}
 echo Update-Scripts: $DIR_UPDATESCRIPTS
 
+##Data-Root
+DIR_DATA_ROOT=$(egrep -w "DIR_DATA_ROOT" $SRC_SETTINGS)
+DIR_DATA_ROOT=${DIR_DATA_ROOT##*=}
+echo Data_ROOT: $DIR_DATA_ROOT
 
 echo
 echo Backup-Quellen
@@ -83,7 +93,6 @@ echo Backup-Quellen
 SRC_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
 SRC_APPDATA=${SRC_APPDATA##*=}
 echo AppData: $SRC_APPDATA
-
 
 #ioBroker
 SRC_IOBROKER=$(egrep -w "SRC_IOBROKER" $SRC_SETTINGS)
@@ -99,7 +108,6 @@ echo OMVBACKUP: $SRC_OMVBACKUP
 SRC_SCRIPTS=$(egrep -w "SRC_SCRIPTS" $SRC_SETTINGS)
 SRC_SCRIPTS=${SRC_SCRIPTS##*=}
 echo Scripts: $SRC_SCRIPTS
-
 
 echo
 echo Backup-Ziele
@@ -127,13 +135,7 @@ echo Backup OMVBACKUP: $DEST_OMVBACKUP
 DEST_SCRIPTS=$(egrep -w "DEST_SCRIPTS" $SRC_SETTINGS)
 DEST_SCRIPTS=${DEST_SCRIPTS##*=}
 echo Backup Scripts: $DEST_SCRIPTS
+
 echo
 echo Ende Settings-Check
 exit
-
-
-
-
-
-
-
