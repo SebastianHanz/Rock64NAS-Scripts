@@ -1,8 +1,6 @@
 +###################################################################+
 + HIER WERDEN DIE INDIVIDUELLEN SERVERPARAMETER ZENTRAL HINTERLEGT  +
-+###################################################################+
 
-+###################################################################+
 +#### SERVER SETTINGS ##############################################+
 + Diese Settings dienen dem Erstellen von Docker Container          +
 																	
@@ -13,10 +11,8 @@ MYSQLPASSWORD=rock64mysql
 PIHOLEPASSWORD=mypiholepassword
 
 +#### ENDE SERVER SETTINGS #########################################+
-+###################################################################+
 
 
-+###################################################################+
 +#### GLOBALE PFADE ################################################+
 + HINWEIS! Alle Pfade OHNE "/" am Anfang oder Ende!					+
 + Globale Pfade bekommen den Praefix DIR_ 							+
@@ -29,13 +25,11 @@ DIR_NEXTCLOUDDATA=srv/dev-disk-by-label-WDRed_4TB_RAID/Data/Nextcloud
 DIR_PIHOLE=opt/PiHole
 DIR_TEMP=tmp
 DIR_UPDATESCRIPTS=home/scripts/Update
+DIR_DATA_ROOT=srv/dev-disk-by-label-WDRed_4TB_RAID
 																	
 +#### ENDE GLOBALE PFADE ###########################################+
-+###################################################################+
 
 
-
-+###################################################################+
 +#### BACKUP Quellen ###############################################+
 + Backup-Quellen werden mit dem Praefix SRC_ angegeben 				+
 
@@ -45,11 +39,8 @@ SRC_OMVBACKUP=srv/dev-disk-by-label-Intern-Backup/Server-Backup/omvbackup
 SRC_SCRIPTS=home/scripts
 																	
 +#### ENDE BACKUP QUELLEN ##########################################+
-+###################################################################+
 
 
-
-+###################################################################+
 +#### BACKUP Ziele #################################################+
 + Backup-Ziele werden mit dem Praefix DEST_ angegeben 				+
 + Falls diese Pfade noch nicht existieren werden diese angelegt		+
@@ -62,4 +53,3 @@ DEST_OMVBACKUP=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/omvbackup
 DEST_SCRIPTS=srv/dev-disk-by-label-WDRed_4TB_RAID/Backup/Server/scripts
  
 +#### ENDE BACKUP Ziele   ##########################################+
-+###################################################################+

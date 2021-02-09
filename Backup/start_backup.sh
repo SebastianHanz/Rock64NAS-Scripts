@@ -1,7 +1,7 @@
 #!/bin/bash
 #Pfad zu Settings-Datei muss immer angegeben werden und stimmen!
 SRC_SETTINGS="/home/scripts/Settings.txt"
-VERSION=2.6a
+VERSION=2.7a
 
 if [ ! -f "$SRC_SETTINGS" ]; then
 	echo Konnte $SRC_SETTINGS nicht finden!
@@ -261,11 +261,7 @@ helpPage() {
 	echo ' "./start_backup.sh -iobroker -appdata" um nur diese beiden zu sichern.'
 	echo ' Soll das Backup archiviert werden, so muss der Parameter -zip angegeben werden'
 	echo
-	echo ' Die Quell- und Zielverzeichnisse werden in der Datei start_backup.sh festgelegt'
-	echo
-	echo ' Um einen Symlink auf das Backup-Script zu erstellen, kann man zum Beispiel:'
-	echo ' "ln -s /home/Scripts/AutomatedBackup/start_backup.sh /start_backup" schreiben'
-	echo ' Danach kann man direkt "./start_backup -xxxx" in die Konsole schreiben'
+	echo ' Die Quell- und Zielverzeichnisse werden in der Datei Settings.txt festgelegt'
 	echo
 	echo '############################  v.'$VERSION' Sebastian Hanz   #############################'
 	echo
