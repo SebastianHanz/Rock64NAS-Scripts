@@ -12,7 +12,7 @@ fi
 DIR_DATA_ROOT=$(egrep -w "DIR_DATA_ROOT" $SRC_SETTINGS)
 DIR_DATA_ROOT=${DIR_DATA_ROOT##*=}
 
-FILE=$DIR_DATA_ROOT/Timestamp.txt
+FILE=/$DIR_DATA_ROOT/Timestamp.txt
 
 date >>$FILE
 exit
