@@ -37,9 +37,32 @@ Die Help-Page zeigt dir die Möglichkeiten dieses Scripts.
 
 Wenn Funktionen des Servers aufgrund fehlender Libraries oder Inkompatibilitäten nicht richtig oder garnicht funktionieren, stelle ich hier scripts bereit, die diese Funktion wiederherstellen oder erst ermöglichen
 
-> ADDED: Script zur Aktualisierung von libseccomp2 auf eine neue Version
+* ADDED: Script zur Aktualisierung von libseccomp2 auf eine neue Version
 damit Nextcloud-Container 
 '>20.0.4' lauffähig sind
 
 ***
+
 ## System
+
+Die System-Scripts verwalten einige Serverspezifische Systemaufgaben und beinhalten auch nützliche Systemtools.
+***    
+### Das Aufräum-Script `cleanup.sh`.     
+Entfernt nicht mehr benötigte temporäre Dateien, caches und nicht mehr benötigte Software automatisch (Nutzerzustimmung über Konsole möglich)
+
+Beispiel für eine einfache Systemreinigung (Apt-cache, apt-clean, apt-autoremove)
+
+    /home/scripts/System/cleanup.sh
+
+Sollen ebenfalls alte Log-Dateien entfernt werden, so muss der Parameter -l übergeben werden. Beachte, dass hierbei zwar Speicherplatz frei wird, diagnosen über vergangene Systemprobleme können dann aber nichtmehr anhand der Log-Dateien gemacht werden. Ebenso ist das folgende Script "findBadAccess.sh" nur noch für die Analyse der aktuellen auth.log anwendbar (kürzlich geschehene Logins).
+
+    /home/scripts/System/cleanup.sh -l
+***
+### Das Failed-Logins Diagnose-Script `findBadAccess.sh`
+Dieses Script durchsucht die Logdatei(en) nach fehlgeschlagenen Loginversuchen in SSH oder OMV-WebGui und listet diese mit zugehöriger IP-Adresse und user auf. Sollten hier Unregelmäßigkeiten erkennbar sein, können notwendige Absicherungsschritte eingeleitet werden (Ports sperren, Firewall...)
+
+    /home/scripts/System/findBadAccess.sh
+***
+### HDD's bei Laune halten mit `keep_HDD_alive.sh`
+Weil bei manchen Festplattenherstellern der Energiesparmodus nicht oder nur schwierig deaktiviert werden kann, wird hier eine einfache Bschäftigungsmethode für die 24/7 HDDs kreiert.
+Ein einfacher Zeitstempel jede Minute in eine Textdatei in einem Verzeichnis deiner Wahl genügt, dass die Festplatten sich nicht automatisch abschalten. Zudem lässt sich sehr einfach analysieren wann der Server ansgeschaltet war, oder ab wann dieser nicht mehr erreichbar war bei einem Systemabsturz etc. __Dieses Script muss über die OMV-GUI über eine geplante Aufgabe jede Minute ausgeführt werden.__
