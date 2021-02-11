@@ -78,3 +78,14 @@ Das Script verwendet die offizielle [OMV-Update-Routine](https://openmediavault.
 Zusätzlich wird im Anschluss ein Cleanup ausgeführt.
 
     /home/scripts/Update/update_server.sh
+
+## Update Nextcloud Docker-Container mit `update_nextcloud_official.sh`
+Der offizielle Weg Nextcloud aktuell zuhalten, ist zuerst den Docker-Container auf die aktuelle Version zu bringen und danach die interne Update-Routine auszuführen. Da der interne Updater oft Probleme macht, erledigt dieses Script den kompletten Updatevorgang incl. möglichem Backup zuvor vollständig.
+
+Beispiel: Nur Docker-Container updaten (nur wenn kein Portainer verfügbar)
+
+    /home/scripts/Update/update_nextcloud_official.sh -c
+
+Beispiel: Komplettes Nextcloud-Update (z.B. nach erfolgreichem Docker-Update mit Portainer)
+
+    /home/scripts/Update/update_nextcloud_official.sh -a
