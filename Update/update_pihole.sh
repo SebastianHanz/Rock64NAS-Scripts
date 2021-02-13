@@ -1,6 +1,13 @@
 #!/bin/bash
-#SRC_SETTINGS müuss immer zuerst angegeben werden!
+#SRC_SETTINGS muss immer zuerst angegeben werden!
 SRC_SETTINGS="/home/scripts/Settings.txt"
+
+if [ ! -f "$SRC_SETTINGS" ]; then
+	echo Konnte $SRC_SETTINGS nicht finden!
+	echo Programm wird geschlossen
+	echo Finish!
+	exit
+fi
 
 #AppData
 DIR_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
@@ -30,7 +37,7 @@ createPiHole() {
 	docker stop pihole
 
 	sleep 2
-	echo -e Lösche alten PiHole-Docker-Container
+	echo -e Loesche alten PiHole-Docker-Container
 	docker rm pihole
 
 	sleep 2
@@ -72,6 +79,7 @@ elif [ "$1" = "-c" ]; then #Nur Container updaten
 		read -p " Antworte mit JA oder NEIN: " ASK
 		if [ "$ASK" = "JA" ]; then
 			createPiHole
+			docker exec pihole /opt/pihole/update.sh
 			echo -e "Finish!"
 			exit
 		else
@@ -86,9 +94,8 @@ elif [ "$1" = "-c" ]; then #Nur Container updaten
 fi
 
 cd /
-echo -e "\n Räume alte Docker Images auf...\n"
+echo -e "\n Raeume alte Docker Images auf...\n"
 docker image prune -f
 sleep 5
 echo -e "Finish!"
 exit
-
