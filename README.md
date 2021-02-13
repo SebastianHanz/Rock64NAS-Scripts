@@ -1,6 +1,32 @@
 # Rock64NAS-Scripts    
 # Scripts für den Rock64NAS
-Verzeichnis für diese Repository: "/home/scripts"
+
+
+# Installation
+Um diese Repository auf deinen Server zu clonen, gehe wie folget vor:
+Falls der Ordner /home/scripts noch nicht existiert, lege diesen an:
+
+    mkdir /home/scripts
+
+Wechsle anschließend in dieses Verzeichnis:
+
+    cd /home/scripts
+
+Clone nun diese Repository in das aktuelle Verzeichnis:
+
+    git clone https://github.com/SebastianHanz/Rock64NAS-Scripts/ ./
+
+Um diese Scripte nun ausführbar zu machen, genügt folgender Befehl:
+
+    chmod -R +x ./*
+
+## Aktualisierung der Repository
+
+Um diese Repo mit deinem Server auch in Zukunft einfach abzugleichen, genügt es das automatisierte `update_scripts_Repository.sh` auszuführen. 
+
+   __ACHTUNG: Falls du außer in Settings.txt selbst Änderungen gemacht hast, werden diese Dateien mit denen von GitHub überschrieben. Falls du eigene Scripte auf Basis meiner verwenden möchtest, dann benenne diese stets um, bspw. indem du `self_` vor den Dateinamen schreibst__
+
+    /home/scripts/Update/update_scripts_Repository.sh
 # SETTINGS
 
 Bevor automatisierte Scripts auf deinem Server ausgeführt werden können, musst du die "#Settings.txt" in Settings.txt umbenennen und an deine Systemvariablen anpassen. 
