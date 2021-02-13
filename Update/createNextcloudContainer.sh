@@ -16,13 +16,13 @@ HOSTNAME=${HOSTNAME##*=}
 TZ=TZ=$(egrep -w "TZ" $SRC_SETTINGS)
 TZ=${TZ##*=}
 
-#AppData
-SRC_APPDATA=$(egrep -w "SRC_APPDATA" $SRC_SETTINGS)
-SRC_APPDATA=${SRC_APPDATA##*=}
+#Nextcloud
+DIR_NEXTCLOUD=$(egrep -w "DIR_NEXTCLOUD" $SRC_SETTINGS)
+DIR_NEXTCLOUD=${DIR_NEXTCLOUD##*=}
 
-#Data
-DIR_DATA=$(egrep -w "DIR_DATA" $SRC_SETTINGS)
-DIR_DATA=${DIR_DATA##*=}
+#NextcloudData
+DIR_NEXTCLOUDDATA=$(egrep -w "DIR_NEXTCLOUDDATA" $SRC_SETTINGS)
+DIR_NEXTCLOUDDATA=${DIR_NEXTCLOUDDATA##*=}
 
 #Create new docker container with custom settings
 docker run -d \
@@ -33,9 +33,10 @@ docker run -d \
 -e TZ=$TZ \
 -p 81:80/tcp \
 -p 444:443/tcp \
--v "/$SRC_APPDATA/Nextcloud:/config:rw" \
--v "/$DIR_DATA/Nextcloud:/data:rw" \
+-v "/$DIR_NEXTCLOUD:/config:rw" \
+-v "/$DIR_NEXTCLOUDDATA:/data:rw" \
 --restart always \
 linuxserver/nextcloud:arm32v7-latest
 
-printf 'Starting up Nextcloud container '
+echo 'Starting up Nextcloud container '
+exit
