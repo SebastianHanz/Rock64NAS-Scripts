@@ -4,8 +4,8 @@
 +#### SERVER SETTINGS ##############################################+
 + Diese Settings dienen dem Erstellen von Docker Container          +
 																	
-SERVER_IP=10.10.10.100
-HOSTNAME=rock64
+SERVER_IP=192.168.0.111
+HOSTNAME=Rock64NAS
 TZ=Europe/Berlin
 MYSQLPASSWORD=rock64mysql
 PIHOLEPASSWORD=mypiholepassword
@@ -15,6 +15,7 @@ PIHOLEPASSWORD=mypiholepassword
 
 +#### GLOBALE PFADE ################################################+
 + HINWEIS! Alle Pfade OHNE "/" am Anfang oder Ende!					+
++ Keine Leerzeichen zwischen Pfad und "=" und keine nach dem Pfad   +
 + Globale Pfade bekommen den Praefix DIR_ 							+
 + Ziel-Pfade bekommen den Praefix DEST_								+
 																	
