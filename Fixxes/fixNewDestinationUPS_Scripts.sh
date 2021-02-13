@@ -3,8 +3,8 @@
 # from /home/scripts to /home/scripts/System/UPS
 
 # Copy new Services to Systemd location
-cp ../etc/systemd/system/REBOOT_AN_USV.service /etc/systemd/system/REBOOT_AN_USV.service
-cp ../etc/systemd/system/SHUTDOWN_AN_USV.service /etc/systemd/system/SHUTDOWN_AN_USV.service
+cp /home/scripts/etc/systemd/system/REBOOT_AN_USV.service /etc/systemd/system/REBOOT_AN_USV.service
+cp /home/scripts/etc/systemd/system/SHUTDOWN_AN_USV.service /etc/systemd/system/SHUTDOWN_AN_USV.service
 
 # Enabling new Services
 echo -e "Enabling new services..."
