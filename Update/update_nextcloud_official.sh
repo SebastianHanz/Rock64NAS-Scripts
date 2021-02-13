@@ -39,7 +39,7 @@ createNextcloud() {
 	docker stop Nextcloud
 
 	sleep 2
-	echo -e "Lösche alten Nextcloud-Docker-Containe\n"
+	echo -e "Loesche alten Nextcloud-Docker-Container\n"
 	docker rm Nextcloud
 
 	sleep 2
