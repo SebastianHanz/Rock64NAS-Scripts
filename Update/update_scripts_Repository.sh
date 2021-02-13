@@ -11,7 +11,7 @@ mkdir $DOWNLOADS
 cd $DOWNLOADS
 
 echo Lade aktuelle GitHub-Repo herunter
-git clone https://0b6d26137c4026ddd46f5356e8329e8989b80ecd:x-oauth-basic@github.com/SebastianHanz/Rock64NAS-Scripts ./
+git clone https://github.com/SebastianHanz/Rock64NAS-Scripts/ ./
 
 chmod -R +x ./*
 rm ./Update/update_scripts_Repository.sh
