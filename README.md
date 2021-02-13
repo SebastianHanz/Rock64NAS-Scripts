@@ -1,7 +1,4 @@
 # Rock64NAS-Scripts    
-# Scripts für den Rock64NAS
-
-
 # Installation
 Um diese Repository auf deinen Server zu clonen, gehe wie folget vor:
 Falls der Ordner /home/scripts noch nicht existiert, lege diesen an:
