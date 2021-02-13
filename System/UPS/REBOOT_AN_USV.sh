@@ -8,5 +8,4 @@
 # Short-Description: Sendet USV, dass Server nun rebootet
 ### END INIT INFO
 
-python /home/scripts/REBOOT_AN_USV.py
-
+python /home/scripts/System/UPS/REBOOT_AN_USV.py

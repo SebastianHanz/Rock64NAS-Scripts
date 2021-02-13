@@ -8,5 +8,4 @@
 # Short-Description: Sendet USV, dass Server nun herunterfaehrt
 ### END INIT INFO
 
-python /home/scripts/SHUTDOWN_AN_USV.py
-
+python /home/scripts/System/UPS/SHUTDOWN_AN_USV.py

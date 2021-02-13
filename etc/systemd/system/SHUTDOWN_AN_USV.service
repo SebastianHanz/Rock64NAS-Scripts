@@ -6,7 +6,7 @@ Before=shutdown.target halt.target
 [Service]
 Type=oneshot
 ExecStart=/bin/true
-ExecStop=/home/scripts/SHUTDOWN_AN_USV.sh
+ExecStop=/home/scripts/System/UPS/SHUTDOWN_AN_USV.sh
 
 [Install]
 WantedBy=halt.target  shutdown.target 
