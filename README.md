@@ -1,4 +1,6 @@
 # Rock64NAS-Scripts    
+## Changelog
+Test 13.02.21 
 # Installation
 Um diese Repository auf deinen Server zu clonen, gehe wie folget vor:
 Falls der Ordner /home/scripts noch nicht existiert, lege diesen an:
@@ -57,9 +59,12 @@ Die Help-Page zeigt dir die Möglichkeiten dieses Scripts.
 
 Wenn Funktionen des Servers aufgrund fehlender Libraries oder Inkompatibilitäten nicht richtig oder garnicht funktionieren, stelle ich hier Scripts bereit, die diese Funktion wiederherstellen oder erst ermöglichen
 
-* ADDED: Script zur Aktualisierung von libseccomp2 auf eine neue Version
+* ADDED: 13.02.21 `fixNewDestinationUPS_Scripts.sh`. Script ändert den Pfad der USV-Kommunikationsscripts von /home/scripts nach /home/scripts/System/UPS und passt die Systemservices darauf an. Dieser Fix hat nur kosmetische Zwecke
+
+* ADDED: 09.02.21 Script zur Aktualisierung von libseccomp2 auf eine neue Version
 damit Nextcloud-Container 
 '>20.0.4' lauffähig sind
+
 
 ***
 # System
