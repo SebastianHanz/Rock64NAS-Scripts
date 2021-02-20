@@ -80,16 +80,9 @@ elif [ "$1" = "-c" ]; then #Nur Container updaten
 		if [ "$ASK" = "JA" ]; then
 			createPiHole
 
-			echo -e "\nSoll das PiHole interne Updatescript jetzt gestartet werden?"
-			read -p " Antworte mit JA oder NEIN: " ASK
-			if [ "$ASK" = "JA" ]; then
-				docker exec pihole /opt/pihole/update.sh
-				echo -e "Finish!"
-				exit
-			else
-				echo -e "Finish!"
-				exit
-			fi
+			# This will maybe be a future feature but not working in docker containers in the moment
+			# docker exec pihole /opt/pihole/update.sh
+
 			echo -e "Finish!"
 			exit
 		else
