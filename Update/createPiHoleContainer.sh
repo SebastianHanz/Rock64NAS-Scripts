@@ -40,13 +40,15 @@ docker run -d \
     -v "/$DIR_PIHOLE/DNSmasq/:/etc/dnsmasq.d/:rw" \
     -e DNS1="127.0.0.1" \
     -e DNS2="1.1.1.1" \
-    --dns=127.0.0.1 --dns=1.1.1.1 \
+    --dns=127.0.0.1 \
+    --dns=1.1.1.1 \
     --restart=always \
     --hostname "$HOSTNAME" \
     -e VIRTUAL_HOST="pinet.net" \
     -e PROXY_LOCATION="pi.net" \
     -e ServerIP="$SERVER_IP" \
     --cap-add NET_ADMIN \
-    pihole/pihole:dev-armhf
+    --network="bridge" \
+    docker.io/pihole/pihole:dev-armhf
 
 echo -e "\nStarting up PiHole container\n"
