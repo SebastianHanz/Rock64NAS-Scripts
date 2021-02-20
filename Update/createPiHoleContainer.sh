@@ -28,9 +28,6 @@ DIR_PIHOLE=${DIR_PIHOLE##*=}
 PIHOLEPASSWORD=PIHOLEPASSWORD=$(egrep -w "PIHOLEPASSWORD" $SRC_SETTINGS)
 PIHOLEPASSWORD=${PIHOLEPASSWORD##*=}
 
-#Create macvlan if not exists
-docker network create -d macvlan test_for_script
-
 #Create new docker container with custom settings
 docker run -d \
     --name pihole \
@@ -43,14 +40,15 @@ docker run -d \
     -v "/$DIR_PIHOLE/DNSmasq/:/etc/dnsmasq.d/:rw" \
     -e DNS1="127.0.0.1" \
     -e DNS2="1.1.1.1" \
-    --dns=127.0.0.1 --dns=1.1.1.1 \
+    --dns=127.0.0.1 \
+    --dns=1.1.1.1 \
     --restart=always \
     --hostname "$HOSTNAME" \
     -e VIRTUAL_HOST="pinet.net" \
     -e PROXY_LOCATION="pi.net" \
     -e ServerIP="$SERVER_IP" \
     --cap-add NET_ADMIN \
-    --network="test_for_script"
-pihole/pihole:dev-armhf
+    --network="host" \
+    docker.io/pihole/pihole:dev-armhf
 
 echo -e "\nStarting up PiHole container\n"
