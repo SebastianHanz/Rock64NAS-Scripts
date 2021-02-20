@@ -48,7 +48,7 @@ docker run -d \
     -e PROXY_LOCATION="pi.net" \
     -e ServerIP="$SERVER_IP" \
     --cap-add NET_ADMIN \
-    --network="host" \
+    --network="bridge" \
     docker.io/pihole/pihole:dev-armhf
 
 echo -e "\nStarting up PiHole container\n"
