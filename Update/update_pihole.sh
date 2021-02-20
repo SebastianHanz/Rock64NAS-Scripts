@@ -27,7 +27,7 @@ DIR_UPDATESCRIPTS=${DIR_UPDATESCRIPTS##*=}
 
 pullNewestPiHole() {
 	echo -e "\nDownloade nun das aktuelle PiHole Image!\n"
-	docker pull pihole/pihole:dev-armhf
+	docker pull docker.io/pihole/pihole:dev-armhf
 	return $?
 }
 
@@ -79,7 +79,17 @@ elif [ "$1" = "-c" ]; then #Nur Container updaten
 		read -p " Antworte mit JA oder NEIN: " ASK
 		if [ "$ASK" = "JA" ]; then
 			createPiHole
-			docker exec pihole /opt/pihole/update.sh
+
+			echo -e "\nSoll das PiHole interne Updatescript jetzt gestartet werden?"
+			read -p " Antworte mit JA oder NEIN: " ASK
+			if [ "$ASK" = "JA" ]; then
+				docker exec pihole /opt/pihole/update.sh
+				echo -e "Finish!"
+				exit
+			else
+				echo -e "Finish!"
+				exit
+			fi
 			echo -e "Finish!"
 			exit
 		else
