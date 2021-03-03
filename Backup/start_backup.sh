@@ -1,7 +1,7 @@
 #!/bin/bash
 #Pfad zu Settings-Datei muss immer angegeben werden und stimmen!
 SRC_SETTINGS="/home/scripts/Settings.txt"
-VERSION=2.7a
+VERSION=2.8a
 
 if [ ! -f "$SRC_SETTINGS" ]; then
 	echo Konnte $SRC_SETTINGS nicht finden!
@@ -124,6 +124,8 @@ fi
 copyAppData() {
 	echo -e "\n################################### AppData #############################################"
 	infoTEXT $DEST_APPDATA -appdata
+	echo -e "Exportiere Nextcloud-Datenbank in AppData\n"
+	docker exec NextcloudDB sh -c "mysqldump -u root -prock64mysql nextcloud > /config/nextcloud-database-backup.sql"
 
 	echo -e "Halte MariaDB  und Nextcloud an\n"
 	docker stop Nextcloud
@@ -136,7 +138,7 @@ copyAppData() {
 
 	echo -e "Starte MariaDB und Nextcoud wieder\n"
 	docker start NextcloudDB
-	sleep 5
+	sleep 10
 	docker start Nextcloud
 	sleep 10
 }
