@@ -33,6 +33,11 @@ pullNewestNextcloud() {
 	return $?
 }
 
+updateDockerCE() {
+	echo -e "Aktualisiere Docker-CE auf die neueste Version.. \n"
+	apt-get update && apt-get upgrade docker-ce docker-ce-cli -y
+}
+
 createNextcloud() {
 	sleep 2
 	echo -e "Halte Nextcloud an\n"
@@ -74,12 +79,14 @@ startUpdatingDocker() {
 	if [ "$retval" = "2" ]; then
 		echo -e "Der Container wurde erfolgreich heruntergeladen!\n Der Container wird nun neu erstellt!"
 		askForBackup
+		updateDockerCE
 		createNextcloud
 	elif [ "$retval" = "0" ]; then
 		echo -e "\nDer Container ist bereits aktuell!\n\nMoechstest du den Container trotzdem neu aufsetzen?"
 		read -p " Antworte mit JA oder NEIN: " ASK
 		if [ "$ASK" = "JA" ]; then
 			askForBackup
+			updateDockerCE
 			createNextcloud
 		else
 			echo Finish!
