@@ -23,11 +23,6 @@ docker start NextcloudDB # Nextcloud Database
 sleep 10                 # Wait for DB-Ready
 docker start Nextcloud   # Nextcloud
 
-# Optional Test-Environment
-docker start NextcloudDB_TestEnv
-sleep 10
-
-docker start Nextcloud_TestEnv
 echo -e "All necessary containers started! \n"
 
 # END
