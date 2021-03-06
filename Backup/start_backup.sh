@@ -1,7 +1,7 @@
 #!/bin/bash
 #Pfad zu Settings-Datei muss immer angegeben werden und stimmen!
 SRC_SETTINGS="/home/scripts/Settings.txt"
-VERSION=2.8a
+VERSION=2.9a
 
 if [ ! -f "$SRC_SETTINGS" ]; then
 	echo Konnte $SRC_SETTINGS nicht finden!
@@ -130,6 +130,10 @@ copyAppData() {
 	echo -e "Halte MariaDB  und Nextcloud an\n"
 	docker stop Nextcloud
 	docker stop NextcloudDB
+
+	#Optionale Testumgebungen stoppen, falls diese laufen
+	docker stop Nextcloud_TestEnv
+	docker stop NextcloudDB_TestEnv >/dev/null 2>&1
 
 	echo -e "Beginne mit dem Kopiervorgang...Bitte warten\n"
 	rsync -ah -P /$SRC_APPDATA /$DEST_APPDATA/backup-appdata-$DATE
@@ -389,9 +393,28 @@ if [[ "$*" == *"-zip"* ]]; then
 	read -p "Gib eine Versionsinformation an: " VERSIONSINFORMATION
 	echo
 	echo "$VERSIONSINFORMATION" >/$DEST_ARCHIVES/backup$FILENAME-$DATE.VERSIONSINFO.txt
-	tar -cjpf $DEST_ARCHIVES/backup$FILENAME-$DATE.tar.bz2 $SOURCE
+
+	# Halte zuerst alle notwendigen Docker-Container an und mache den MariaDB-Export
+	echo -e "Exportiere Nextcloud-Datenbank in AppData\n"
+	docker exec NextcloudDB sh -c "mysqldump -u root -prock64mysql nextcloud > /config/nextcloud-database-backup.sql"
+
+	echo -e "Halte MariaDB  und Nextcloud an\n"
+	docker stop Nextcloud
+	docker stop NextcloudDB
+
+	#Optionale Testumgebungen stoppen, falls diese laufen
+	docker stop Nextcloud_TestEnv
+	docker stop NextcloudDB_TestEnv >/dev/null 2>&1
+
+	echo -e "Beginne mit dem Kopiervorgang...Bitte warten\n"
+	tar -vcjpf $DEST_ARCHIVES/backup$FILENAME-$DATE.tar.bz2 $SOURCE
 	echo 'Das Archiv wurde erfolgreich erstellt!'
-	echo
+
+	echo -e "Starte MariaDB und Nextcoud wieder\n"
+	docker start NextcloudDB
+	sleep 10
+	docker start Nextcloud
+	sleep 10
 
 else
 
