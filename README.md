@@ -1,35 +1,27 @@
 # Rock64NAS-Scripts    
-## Changelog
-* IMPROVED: 03.03.21 Backup-Script für AppData angepasst: Die Datenbank der Nextcloud wird vor dem Backup mit dem offiziellen SQL-Methode exportiert und im Anschluss gesichert
 
-* ADDED: 03.03.21 `powerdownHDD.sh` und `powerupHDD.sh` in __System__.
-Ermöglicht das einfache ausschalten der Festplatten im RAID-Verbund wenn diese über längere Zeit nicht benötigt werden, andere Funktionen des Servers jedoch erhalten bleiben sollen (ioBroker, PiHole...).  
-__powerdownHDD:__ Beendet alle Dienste (Samba, DLNA..) und Container welche auf das RAID zugreifen und hängt die Partition danach aus, damit die Festplatten nicht aufgeweckt werden können. _Der FTP-Adapter in OMV sollte im Idealfall dauerhaft deaktiviert sein_   
-__powerupHDD:__ Hängt die Partition wieder ins System ein und startet anschließend alle Dienste und Container welche auf das RAID zugreifen. 
-
-
-* ADDED: 13.02.21 `fixNewDestinationUPS_Scripts.sh`. Script ändert den Pfad der USV-Kommunikationsscripts von /home/scripts nach /home/scripts/System/UPS und passt die Systemservices darauf an. Dieser Fix hat nur kosmetische Zwecke
-
-* ADDED: 09.02.21 `fixNextcloudGreater20.0.4_Problem` zur Aktualisierung von libseccomp2 auf eine neue Version
-damit Nextcloud-Container 
-'>20.0.4' lauffähig sind
 # Installation
-Um diese Repository auf deinen Server zu clonen, gehe wie folget vor:
-Falls der Ordner /home/scripts noch nicht existiert, lege diesen an:
+Um diese Repository auf deinen Server zu clonen, gehe wie folget vor: 
+   
+Schritt 1: __Falls der Ordner /home/scripts noch nicht existiert, lege diesen an:__
 
     mkdir /home/scripts
 
-Wechsle anschließend in dieses Verzeichnis:
+Schritt 2: __Wechsle anschließend in dieses Verzeichnis:__
 
     cd /home/scripts
 
-Clone nun diese Repository in das aktuelle Verzeichnis:
+Schritt 3: __Falls dein scripts-Ordner neu erstellt wurde _und leer ist_, führe folgendes aus, sonst gehe zu Schritt 4:__
 
     git clone https://github.com/SebastianHanz/Rock64NAS-Scripts/ ./
 
-Um diese Scripte nun ausführbar zu machen, genügt folgender Befehl:
+Schritt 4: __Wenn dein scripts-Ordner _bereits andere Dateien von dir beinhaltet_, dann führe folgendes aus, sonst zu Schritt 5:__
 
-    chmod -R +x ./*
+    git clone https://github.com/SebastianHanz/Rock64NAS-Scripts/ /tmp/gitRockNAS && cp -r /tmp/gitRockNAS/* /home/scripts && rm -r /tmp/gitRockNAS
+
+Schritt 5: __Um diese Scripte nun ausführbar zu machen, genügt folgender Befehl:__
+
+    chmod -R +x /home/scripts/*
 
 ## Aktualisierung der Repository
 
@@ -122,3 +114,18 @@ Beispiel: Nur Docker-Container updaten (nur wenn kein Portainer verfügbar)
 Beispiel: Komplettes Nextcloud-Update (z.B. nach erfolgreichem Docker-Update mit Portainer)
 
     /home/scripts/Update/update_nextcloud_official.sh -a
+
+## Changelog
+* IMPROVED: 06.03.21 Backup-Script für AppData angepasst: Die Datenbank der Nextcloud wird vor dem Backup mit dem offiziellen SQL-Methode exportiert und im Anschluss gesichert
+
+* ADDED: 03.03.21 `powerdownHDD.sh` und `powerupHDD.sh` in __System__.
+Ermöglicht das einfache ausschalten der Festplatten im RAID-Verbund wenn diese über längere Zeit nicht benötigt werden, andere Funktionen des Servers jedoch erhalten bleiben sollen (ioBroker, PiHole...).  
+__powerdownHDD:__ Beendet alle Dienste (Samba, DLNA..) und Container welche auf das RAID zugreifen und hängt die Partition danach aus, damit die Festplatten nicht aufgeweckt werden können. _Der FTP-Adapter in OMV sollte im Idealfall dauerhaft deaktiviert sein_   
+__powerupHDD:__ Hängt die Partition wieder ins System ein und startet anschließend alle Dienste und Container welche auf das RAID zugreifen. 
+
+
+* ADDED: 13.02.21 `fixNewDestinationUPS_Scripts.sh`. Script ändert den Pfad der USV-Kommunikationsscripts von /home/scripts nach /home/scripts/System/UPS und passt die Systemservices darauf an. Dieser Fix hat nur kosmetische Zwecke
+
+* ADDED: 09.02.21 `fixNextcloudGreater20.0.4_Problem` zur Aktualisierung von libseccomp2 auf eine neue Version
+damit Nextcloud-Container 
+'>20.0.4' lauffähig sind
