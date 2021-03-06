@@ -83,9 +83,14 @@ Sollen ebenfalls alte Log-Dateien entfernt werden, so muss der Parameter -l übe
 Dieses Script durchsucht die Logdatei(en) nach fehlgeschlagenen Loginversuchen in SSH oder OMV-WebGui und listet diese mit zugehöriger IP-Adresse und user auf. Sollten hier Unregelmäßigkeiten erkennbar sein, können notwendige Absicherungsschritte eingeleitet werden (Ports sperren, Firewall...)
 
     /home/scripts/System/findBadAccess.sh
-## HDD's bei Laune halten mit `keep_HDD_alive.sh`
+## HDDs bei Laune halten mit `keep_HDD_alive.sh`
 Weil bei manchen Festplattenherstellern der Energiesparmodus nicht oder nur schwierig deaktiviert werden kann, wird hier eine einfache Bschäftigungsmethode für die 24/7 HDDs kreiert.
 Ein einfacher Zeitstempel jede Minute in eine Textdatei in einem Verzeichnis deiner Wahl genügt, dass die Festplatten sich nicht automatisch abschalten. Zudem lässt sich sehr einfach analysieren wann der Server ansgeschaltet war, oder ab wann dieser nicht mehr erreichbar war bei einem Systemabsturz etc. __Dieses Script muss über die OMV-GUI über eine geplante Aufgabe jede Minute ausgeführt werden.__
+
+## HDDs aus/einschalten mit `powerdownHDD.sh` und `powerupHDD.sh`
+Ermöglicht das einfache ausschalten der Festplatten im RAID-Verbund wenn diese über längere Zeit nicht benötigt werden, andere Funktionen des Servers jedoch erhalten bleiben sollen (ioBroker, PiHole...).  
+__powerdownHDD:__ Beendet alle Dienste (Samba, DLNA..) und Container welche auf das RAID zugreifen und hängt die Partition danach aus, damit die Festplatten nicht aufgeweckt werden können. _Der FTP-Adapter in OMV sollte im Idealfall dauerhaft deaktiviert sein_   
+__powerupHDD:__ Hängt die Partition wieder ins System ein und startet anschließend alle Dienste und Container welche auf das RAID zugreifen.
 
 ***
 
@@ -119,10 +124,6 @@ Beispiel: Komplettes Nextcloud-Update (z.B. nach erfolgreichem Docker-Update mit
 * IMPROVED: 06.03.21 Backup-Script für AppData angepasst: Die Datenbank der Nextcloud wird vor dem Backup mit dem offiziellen SQL-Methode exportiert und im Anschluss gesichert
 
 * ADDED: 03.03.21 `powerdownHDD.sh` und `powerupHDD.sh` in __System__.
-Ermöglicht das einfache ausschalten der Festplatten im RAID-Verbund wenn diese über längere Zeit nicht benötigt werden, andere Funktionen des Servers jedoch erhalten bleiben sollen (ioBroker, PiHole...).  
-__powerdownHDD:__ Beendet alle Dienste (Samba, DLNA..) und Container welche auf das RAID zugreifen und hängt die Partition danach aus, damit die Festplatten nicht aufgeweckt werden können. _Der FTP-Adapter in OMV sollte im Idealfall dauerhaft deaktiviert sein_   
-__powerupHDD:__ Hängt die Partition wieder ins System ein und startet anschließend alle Dienste und Container welche auf das RAID zugreifen. 
-
 
 * ADDED: 13.02.21 `fixNewDestinationUPS_Scripts.sh`. Script ändert den Pfad der USV-Kommunikationsscripts von /home/scripts nach /home/scripts/System/UPS und passt die Systemservices darauf an. Dieser Fix hat nur kosmetische Zwecke
 
