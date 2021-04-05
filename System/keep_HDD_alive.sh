@@ -14,7 +14,7 @@ if [ ! -f "$SRC_SETTINGS" ]; then
     exit
 fi
 
-if [ -d "$DIR_DATA_ROOT" ]; then
+if [ -d "/$DIR_DATA_ROOT/" ]; then
     date >>$FILE
 fi
 
