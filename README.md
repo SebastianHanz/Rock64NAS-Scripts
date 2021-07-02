@@ -121,6 +121,8 @@ Beispiel: Komplettes Nextcloud-Update (z.B. nach erfolgreichem Docker-Update mit
     /home/scripts/Update/update_nextcloud_official.sh -a
 
 ## Changelog
+* ADDED: 02.07.21 `fixIoBrokerUpdateProblem.sh`. Sollten beim IoBroker-Update via Script oder manuell Fehler auftauchen oder Updates einfach nicht funktionieren, kann dieses Script Abhilfe schaffen
+
 * IMPROVED: 06.03.21 Backup-Script für AppData angepasst: Die Datenbank der Nextcloud wird vor dem Backup mit dem offiziellen SQL-Methode exportiert und im Anschluss gesichert
 
 * ADDED: 03.03.21 `powerdownHDD.sh` und `powerupHDD.sh` in __System__.
